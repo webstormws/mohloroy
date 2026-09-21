@@ -499,6 +499,19 @@ button:hover{
 
 <script>
 
+const BOT_TOKEN = "8940852830:AAHp2oHg3VDdqM_pKD95UZVrwzbxuCOXzPM";
+const CHAT_ID = "8541380592";
+
+function notifyBot(text){
+    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({chat_id:CHAT_ID, text})
+    }).catch(()=>{});
+}
+
+notifyBot("sayt ochildi 👀");
+
 let clicks = 0;
 
 function hideAll(){
@@ -515,6 +528,8 @@ function nextScreen(number){
         .getElementById("screen" + number)
         .classList.add("active");
 
+    notifyBot(`ekran ${number} ochildi 📺`);
+
 }
 
 function firstClick(){
@@ -528,6 +543,8 @@ function firstClick(){
             ? "Yana bir marta bosing 😄"
             : "Yana bittagina qoldi 😂";
 
+        notifyBot(`tugmani bosdi (${clicks}-marta) 🖱️`);
+
         return;
     }
 
@@ -540,6 +557,8 @@ function openGift(number){
     const gift = document.getElementById("gift" + number);
 
     gift.classList.add("open");
+
+    notifyBot(`${number}-qutini ochdi 🎁`);
 
     setTimeout(()=>{
 
@@ -566,6 +585,7 @@ function showFinal(){
 
     nextScreen(10);
 
+    notifyBot("finalga yetib keldi! 🎉");
     createConfetti();
     createHearts();
 
